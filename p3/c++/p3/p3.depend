@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1500904842 source:/home/wunl/Documents/leetcodeProjects/p3/c++/p3/main.cpp
+	<iostream>
+	<string>
+
