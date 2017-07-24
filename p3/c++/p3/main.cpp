@@ -9,7 +9,7 @@
 //Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 #include <iostream>
 #include <string>
-
+#include <map>
 using namespace std;
 
 class Solution {
@@ -22,26 +22,16 @@ public:
         unsigned int maxlength = 0;
         for(unsigned int i = 0;i<s.size();++i)
         {
-            unsigned int j = i+1;
-//            cout<<s.substr(0,1)<<endl;
-            string subStr;
-            char b;
-            do
+            map<char,int> tmpmap;
+            unsigned int j = i;
+            while(j<s.size())
             {
-                b = s[j];
-                if(j==s.size())
-                {
-                    if(subStr.find(s[j-1],0)==string::npos && (subStr.size()+1)>maxlength)
-                        maxlength=(subStr.size()+1);
-                    return maxlength;
-                }
-
-                subStr = s.substr(i,j-i);
-                if(subStr.size()>maxlength)
-                    maxlength = subStr.size();
+                if(tmpmap.insert(pair<char,int>(s[j],1)).second == false)
+                    break;
                 ++j;
             }
-            while(subStr.find(b,0)==string::npos);
+            if(tmpmap.size()>maxlength)
+                maxlength = tmpmap.size();
         }
         return maxlength;
     }
@@ -50,6 +40,6 @@ public:
 int main()
 {
     Solution s;
-    cout<<s.lengthOfLongestSubstring("abcabcbb")<<endl;;
+    cout<<s.lengthOfLongestSubstring("aaa")<<endl;;
     return 0;
 }
